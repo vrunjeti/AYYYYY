@@ -2,11 +2,13 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var morgan     = require('morgan');
+var cors       = require('cors');
 var Project    = require('./models/project');
 
 mongoose.connect('mongodb://teamayyyyy:hoorayyyyy@ds047782.mongolab.com:47782/ayyyyy');
 
 var app = express();
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
