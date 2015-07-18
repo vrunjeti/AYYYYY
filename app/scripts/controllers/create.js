@@ -1,13 +1,13 @@
 'use strict';
 
-/*
+/**
  * @ngdoc function
  * @name bldrApp.controller:CreateCtrl
  * @description
  * # CreateCtrl
  * Controller of the bldrApp
- 
-/*angular.module('bldrApp')
+ */
+/**angular.module('bldrApp')
   .controller('CreateCtrl', function () {
 
   	var vm = this;

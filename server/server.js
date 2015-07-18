@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 3000;
+var port = 3000;
 
 // Allow CORS so that backend and frontend could pe put on different servers
 var allowCrossDomain = function(req, res, next) {
