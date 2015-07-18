@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+
+    <script>
+      var map;
+      var marker;
+
+      function loadScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
+        document.body.appendChild(script);
+      }
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        // This event listener will call addMarker() when the map is clicked.
+        google.maps.event.addListener(map, 'click', function(event) {
+          // console.log(event.latLng);
+          addMarker(event.latLng);
+        });
+
+        var pos;
+        
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(location){
+              pos = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+              map.setCenter(pos); 
+              marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: 'Pin by your current location'
+              });
+            },
+            function() {
+              location_init_fail();
+            });
+        } else {
+          location_init_fail();
+        }
+        
+      };
+
+      function location_init_fail() {
+        var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461); 
+        map.setCenter(pos);
+        marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          title: 'Pin by default location: center of Boston'
+        });
+      };
+
+      function addMarker(location) {
+        marker.setPosition(location);
+        if (marker.getAnimation() != null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ marker.setAnimation(null); }, 750);
+        }
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + location.A + "," + location.F + "&sensor=true";
+        $.ajax({
+          type: "POST",
+          url: url,
+          dataType: "json",
+          success:function(data) {
+            console.log(data.results[0].formatted_address);
+          }
+        });
+      }
+
+      window.onload = loadScript;
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

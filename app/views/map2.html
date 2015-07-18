@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+
+    <script>
+      var map;
+      var markers_data = [];
+      var markers = [];
+      var infowindow = new google.maps.InfoWindow();
+
+      function loadScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
+        document.body.appendChild(script);
+      }
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        
+        markers.foreach(function(json_obj) {
+          addMarker(json_obj);
+          
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event);
+        });
+
+        google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.open(map, this);
+          });
+
+        for (var i = 0, m; m = markers[i]; i++) {
+          google.maps.event.addListener(m, 'click', function(e) {
+            var contentString = '<div id="content">' +
+                                  '<p>' + this.project_info.project_title + ' ' 
+                                        + this.project_info.project_description + ' ' 
+                                        + this.project_info.project_id + 
+                                  '</p>'
+                                '</div>';
+            infowindow.setContent('Marker position: ' + this.getPosition());
+            infowindow.open(map, this);
+          });
+        }
+
+        var pos;
+        
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(location){
+              pos = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+              map.setCenter(pos); 
+              marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: 'Pin by your current location'
+              });
+            },
+            function() {
+              location_init_fail();
+            });
+        } else {
+          location_init_fail();
+        }
+        
+      };
+
+      function location_init_fail() {
+        var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461); 
+        map.setCenter(pos);
+      };
+
+      function addMarker(event) {
+        var location = new google.maps.LatLng(event.location.latitude,event.location.longitude);
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          clickable: true,
+          animation: google.maps.Animation.DROP,
+          project_info: {
+            project_title: event.name,
+            project_description: event.description
+            project_id : event.id
+          },
+        });
+        markers.push(marker);
+      }
+
+      window.onload = loadScript;
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
