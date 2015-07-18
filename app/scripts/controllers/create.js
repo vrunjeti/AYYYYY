@@ -9,10 +9,10 @@
  */
 
 angular.module('bldrApp')
-  .controller('CreateCtrl', function ($http, $window, $location, $scope) {
+  .controller('CreateCtrl', function ($http, $scope) {
 
-    var vm = this;
-	var url = 'http://localhost:3000/api/';
+  var vm = this;
+	var baseUrl = 'http://localhost:3000/api/';
 
 	$scope.$on('$viewContentLoaded', function() {
 
@@ -28,9 +28,9 @@ angular.module('bldrApp')
 
 	vm.insert = function(formData){
 
-		var url = 'http://localhost:8000/auth/signup';
+		// var url = 'http://localhost:8000/auth/signup';
 		$http
-		.post(url , {
+		.post(baseUrl , {
 			name : formData.name, 
 			location : formData.location,
 			description : formData.description,
@@ -53,8 +53,6 @@ angular.module('bldrApp')
           // console.log(event.latLng);
           vm.addMarker(event.latLng);
         });
-
-        // alert("here");
 
         var pos;
         
@@ -112,7 +110,6 @@ angular.module('bldrApp')
 	      }
 	    });
       }
-    
 
   });
 
