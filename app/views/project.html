@@ -1,26 +1,35 @@
 <div>	
-<<<<<<< Updated upstream
 	<h2>{{projectData.name}}</h2>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Location</h4>
+            <h4>Location</h4>
             <p>{{projectData.location}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Participants</h4>
+            <h4>Status</h4>
+            <p>{{projectData.status}}</p>
+        </div>
+        <div class="divider"></div>
+        <div class = "section">
+            <h4>Category</h4>
+            <p>{{projectData.category}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Participants</h4>
             <div ng-repeat = "participant in projectData.participants">
             <p> {{participant}}</p>
             </div>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Description</h4>
+            <h4>Description</h4>
             <p> {{projectData.description}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Pictures</h4>
+            <h4>Pictures</h4>
             <ul id = "staggered-test">
             <!--<p> {{projectData.pictures}}</p>-->
                 <li class = "crop" style="transform: translateX(0px); opacity: 1;">
@@ -32,39 +41,6 @@
                     <img id = "image-test-6" class ="responsive-img" src = "http://www.wadifa.co/wp-content/uploads/2015/05/treehouse-blueprints-good-design-on-others-galleries-12.jpg">
                 </li>
             </ul>
-=======
-	<h2>{{project.projectData.name}}</h2>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Location</h4>
-            <!-- bad data -->
-            <p >{{project.projectData.location.address}}</p>
-        </div>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Status</h4>
-            <p>{{project.projectData.status}}</p>
-        </div>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Category</h4>
-            <p>{{project.projectData.category}}</p>
-        </div>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Participants</h4>
-            <p ng-repeat="participant in project.projectData.participants">{{participant}}</p>
-        </div>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Description</h4>
-            <p>{{project.projectData.description}}</p>
-        </div>
-    <div class="divider"></div>
-        <div class = "section">
-            <h4>Pictures</h4>
-            <p> {{project.projectData.pictures}}</p>
->>>>>>> Stashed changes
         </div>
     <div class = "right-align">
         <!--<a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>-->
