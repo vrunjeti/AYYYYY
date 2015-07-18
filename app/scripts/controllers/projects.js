@@ -16,6 +16,8 @@ angular.module('bldrApp')
     var markers_data = [] 
     var markers = [];
     var infowindow = new google.maps.InfoWindow();
+    vm.showListView = false;
+    vm.toggleName = 'List';
 
     $scope.$on('$viewContentLoaded', function() {
       $http
@@ -28,6 +30,11 @@ angular.module('bldrApp')
       
     });
 
+    vm.toggleView = function(){
+      vm.showListView = !vm.showListView;
+      vm.toggleName = (vm.toggleName === 'List') ? 'Map' : 'List';
+    }
+
     vm.map_initialize = function() {
         var mapOptions = {
           zoom: 16,
@@ -38,7 +45,7 @@ angular.module('bldrApp')
         
         markers_data.forEach(function(json_obj) {
           vm.addMarker(json_obj);
-          console.log(json_obj);
+          // console.log(json_obj);
         });
 
         for (var i = 0, m; m = markers[i]; i++) {
@@ -47,7 +54,7 @@ angular.module('bldrApp')
                                   '<h5> Project Name: ' + this.project_info.project_title + '</h5>' +
                                   '<h5> Description: </h5>' +
                                     '<p> ' + this.project_info.project_description + '</p>' +
-                                  '<p> <a href="#/projects/' +this.project_info.project_id + '"><input type="button" Value="View" /></a>' +
+                                  '<p> <a href="#/projects/' +this.project_info.project_id + '"><input type="button" Value="More" /></a>' +
                                   '</p>' +
                                 '</div>';
             infowindow.setContent(contentString);
@@ -59,7 +66,7 @@ angular.module('bldrApp')
                                   '<h5> Project Name: ' + this.project_info.project_title + '</h5>' +
                                   '<h5> Description: </h5>' +
                                     '<p> ' + this.project_info.project_description + '</p>' +
-                                  '<p> <a href="#/projects/' +this.project_info.project_id + '"><input type="button" Value="View" /></a>' +
+                                  '<p> <a href="#/projects/' +this.project_info.project_id + '"><input type="button" Value="More" /></a>' +
                                   '</p>' +
                                 '</div>';
             infowindow.setContent(contentString);
@@ -100,15 +107,31 @@ angular.module('bldrApp')
           var location = new google.maps.LatLng(event.location.latitude,event.location.longitude);
           var marker = new google.maps.Marker({
             position: location,
-            map: map,
+            // map: map,
             clickable: true,
             animation: google.maps.Animation.DROP,
             project_info: {
-              project_title: event.name,
-              project_description: event.description,
+              project_title: event.name? event.name:"",
+              project_description: event.description? event.description:"",
               project_id : event._id
             },
           });
+          if(map.getBounds()!=null) {
+            if(map.getBounds().contains(location)) {
+              marker.setMap(map);
+              console.log(marker.position);
+            }
+          }
+          else{
+            google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+              // console.log(map.getBounds().contains(location));
+              if(map.getBounds().contains(location)) {
+                marker.setMap(map);
+                console.log(marker.position);
+              }
+            });
+          }
+          
           markers.push(marker);
         }
       }
