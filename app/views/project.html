@@ -1,4 +1,5 @@
 <div>	
+<<<<<<< Updated upstream
 	<h2>{{projectData.name}}</h2>
     <div class="divider"></div>
         <div class = "section">
@@ -31,6 +32,39 @@
                     <img id = "image-test-6" class ="responsive-img" src = "http://www.wadifa.co/wp-content/uploads/2015/05/treehouse-blueprints-good-design-on-others-galleries-12.jpg">
                 </li>
             </ul>
+=======
+	<h2>{{project.projectData.name}}</h2>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Location</h4>
+            <!-- bad data -->
+            <p >{{project.projectData.location.address}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Status</h4>
+            <p>{{project.projectData.status}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Category</h4>
+            <p>{{project.projectData.category}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Participants</h4>
+            <p ng-repeat="participant in project.projectData.participants">{{participant}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Description</h4>
+            <p>{{project.projectData.description}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Pictures</h4>
+            <p> {{project.projectData.pictures}}</p>
+>>>>>>> Stashed changes
         </div>
     <div class = "right-align">
         <!--<a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>-->

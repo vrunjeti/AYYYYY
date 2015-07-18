@@ -9,13 +9,18 @@
  */
 angular.module('bldrApp')
   .controller('ProjectCtrl', function ($scope, $http, $routeParams) {
-    $scope.id = $routeParams.id;
+  	var vm = this;
+    vm.id = $routeParams.id;
     var baseUrl = 'http://localhost:3000/api/';
 
+<<<<<<< Updated upstream
 
 	  $http.get(baseUrl + 'projects/' + $scope.id)
+=======
+	  $http.get(baseUrl + 'projects/' + vm.id)
+>>>>>>> Stashed changes
 	    .success(function (data) {
-	      $scope.projectData = data;
+	      vm.projectData = data;
 	    });
 
 
