@@ -27,21 +27,45 @@ angular.module('bldrApp')
       };
     });
 
-	vm.insert = function(formData){
-    console.log(formData);
-		$http
-		.post(baseUrl + "projects", {
+  	$('#upfile1').on('click', function() {
+  		$('#filUpload').trigger('click');
+  	});
+    $scope.formData = {};
+    $scope.formData.images = [];
+    $scope.fileNameChanged = function(el) {
+    	var reader = new FileReader();
+    	reader.onload = function(e) {
+    		var url = 'https://api.cloudinary.com/v1_1/ayyyyy/image/upload';
+    		var timestamp = new Date().getTime();
+    		var secret = 'J6IAdyDWkDty8vNCqYKfpEOkpsA';
+    		var payload = {
+    			file: e.target.result,
+    			api_key: '421528816292945',
+    			timestamp: timestamp,
+    			signature: CryptoJS.SHA1('format=jpeg&timestamp=' + timestamp + secret).toString(CryptoJS.enc.Hex),
+    			resource_type: 'image',
+    			format: 'jpeg'
+    		};
+    		$http.post(url, payload).success(function (data) {
+    			$scope.formData.images.push(data.secure_url);
+    			$('#appendImage').append('<div class="col s3 span s3"><img src="' + data.secure_url + '"></img></div>');
+    		});
+    	};
+    	for (var iter = 0; iter < el.files.length ; iter ++ ) {
+    		reader.readAsDataURL(el.files[0]);
+    	}
+    };
+	$scope.insert = function(formData){
+		var data = {
 			name : formData.name, 
 			location : formData.location,
 			description : formData.description,
 			participants : formData.participants,
       category: formData.category
-			//image : formData.image
-		})
-    .success(function(data){
-      console.log(data);
-      $location.path('/projects/' + data.data._id);
-    });
+			images : formData.images
+		};
+
+		$http.post(baseUrl + 'projects' , data);
 	};
 
 	  var map;
