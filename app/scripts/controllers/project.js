@@ -9,9 +9,16 @@
  */
 angular.module('bldrApp')
   .controller('ProjectCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+    var vm = this;
+    var baseUrl = 'still needs to be determined';
+
+    vm.loadProject = function() {
+      $http
+        .get(baseUrl + 'getProject')
+        .success(function (data) {
+          vm.projectData = data;
+        });
+    };
+
   });

@@ -8,10 +8,18 @@
  * Controller of the bldrApp
  */
 angular.module('bldrApp')
-  .controller('ProjectsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ProjectsCtrl', function ($http) {
+
+    var vm = this;
+    var baseUrl = 'http://localhost:3000/api/';
+
+    vm.loadAll = function() {
+      $http
+        .get(baseUrl + 'projects')
+        .success(function (data) {
+          vm.projectCollection = data;
+        });
+    };
+
+
   });
