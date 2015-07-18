@@ -31,18 +31,20 @@
 	        <input id="participants" type="text" ng-model="create.formData.participants">
 	      </div>
 	    </div>
-	      
+
 	    <div class="row">
 	      <div class="input-field col s12">
-	      <label for="image">Upload Image</label>
-	      <form id = "uploadForm" enctype = "multipart/form-data" action = "/api/photo" method = "post">
-            <input type="file" name="userPhoto">
-            <input type="submit" value="Upload Image" name="submit">
-          </form>
-          </div>
-	    </div>
+              <div class = "btn">
+	            <form id = "uploadForm" enctype = "multipart/form-data" action = "/api/photo" method = "post">
+                    <span>Upload Image</span>
+                    <input type="file" value="Upload Image" name="submit">
+                </form>
+              </div>
+              </div>
+        </div>
 
-        <div class="row">
+
+          <div class="row">
 	      <div class="input-field col s12">
 	      	<label for="category">Category</label>
 	      	<form id="tableForm" action="/getJson" method="get">
@@ -56,7 +58,6 @@
             </form>
 	      </div>
 	    </div>
-
 	    <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="create.insert(create.formData)">
 	    	Submit
 		    <i class="mdi-content-send right"></i>
