@@ -1,26 +1,61 @@
 <div>	
-	<h2>Project Title {{projectData.name}}</h2>
+	<h2>{{projectData.name}}</h2>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Location</h4>
-            <p> Actual location {{projectData.location}}</p>
+            <p>{{projectData.location}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Participants</h4>
-            <p> List of Participants {{projectData.participants}}</p>
+            <div ng-repeat = "participant in projectData.participants">
+            <p> {{participant}}</p>
+            </div>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Description</h4>
-            <p> Brief Details {{projectData.description}}</p>
+            <p> {{projectData.description}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Pictures</h4>
-            <p> Uploaded Pictures{{projectData.pictures}}</p>
+            <ul id = "staggered-test">
+            <!--<p> {{projectData.pictures}}</p>-->
+                <li class = "crop" style="transform: translateX(0px); opacity: 1;">
+                    <img id="image-test-1" class ="responsive-img" src="http://www.azzanarts.com/tree-houses/wp-content/gallery/the-saloon-treehouse/the-saloon-treehouse-004.jpg" height="500" width="500">
+                    <img id = "image-test-2" class ="responsive-img" src ="http://media-cdn.tripadvisor.com/media/photo-s/03/b5/f5/9e/timber-ridge-outpost.jpg" height="300" width="300">
+                    <img id = "image-test-4" class ="responsive-img" src ="http://blog.sfgate.com/thebigevent/files/2012/09/treehouse-vacaville-one-600x427.jpg" height="500" width="500">
+                    <img id = "image-test-5" class ="responsive-img" src = "http://tours.tourfactory.com/tours/media/scene/big2/00/18/77/57/18775703.jpg" height="500" width="500">
+                    <img id = "image-test-3" class ="responsive-img" src ="http://cdn.homedit.com/wp-content/uploads/2012/09/california-tree-house.jpg" height="600" width="500">
+                    <img id = "image-test-6" class ="responsive-img" src = "http://www.wadifa.co/wp-content/uploads/2015/05/treehouse-blueprints-good-design-on-others-galleries-12.jpg">
+                </li>
+            </ul>
         </div>
     <div class = "right-align">
-        <a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>
+        <!--<a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>-->
+        <button data-target="modal2" class="btn modal-trigger">BuildMe</button>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h3 align="left">Sign Up</h3>
+                <div class="row">
+                <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type = "text">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class = "input-field col s6">
+                        <input id="last_name" type="text">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/#/projects/{{projectData._id}}" class=" modal-action modal-close waves-effect waves-green btn-flat">sign me up!</a>
+            </div>
+        </div>
     </div>
 </div>
