@@ -52,7 +52,7 @@ projectRoute.post(function(req, res){
   project.name = req.body.name;
   project.location = req.body.location;
   project.description = req.body.description;
-  project.participants = req.body.participants;
+  project.participants = [];
   project.images = req.body.images;
   project.category = req.body.category;
   project.status = req.body.status || 'Status unavailable';

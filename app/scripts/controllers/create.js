@@ -60,7 +60,6 @@ angular.module('bldrApp')
   			name : formData.name, 
   			location : formData.location,
   			description : formData.description,
-  			participants : formData.participants,
         category: formData.category,
   			images : formData.images
   		};
