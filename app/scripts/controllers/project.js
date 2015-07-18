@@ -8,14 +8,15 @@
  * Controller of the bldrApp
  */
 angular.module('bldrApp')
-  .controller('ProjectCtrl', function () {
+  .controller('ProjectCtrl', function ($http, $routeParams) {
 
     var vm = this;
-    var baseUrl = 'still needs to be determined';
+    vm.id = $routeParams.id;
+    var baseUrl = 'http://localhost:3000/api/';
 
     vm.loadProject = function() {
       $http
-        .get(baseUrl + 'getProject')
+        .get(baseUrl + 'projects/' + vm.id)
         .success(function (data) {
           vm.projectData = data;
         });
