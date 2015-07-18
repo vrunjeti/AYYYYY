@@ -13,16 +13,33 @@ angular.module('bldrApp')
     vm.id = $routeParams.id;
     var baseUrl = 'http://localhost:3000/api/';
 
-<<<<<<< Updated upstream
+    $scope.$on('$viewContentLoaded', function() {
+      vm.load();
+    });
 
-	  $http.get(baseUrl + 'projects/' + $scope.id)
-=======
-	  $http.get(baseUrl + 'projects/' + vm.id)
->>>>>>> Stashed changes
-	    .success(function (data) {
-	      vm.projectData = data;
-	    });
+	  vm.load = function() {
+      $http.get(baseUrl + 'projects/' + vm.id)
+  	    .success(function (data) {
+  	      vm.projectData = data;
+  	    });
+    }
 
+    vm.addParticipant = function() {
+      if(vm.participantToAdd === undefined || vm.participantToAdd === '') {
+        Materialize.toast('Please enter a name');
+      }
+      else {
+        $http
+          .put(baseUrl + 'addparticipant', {
+            id: vm.id,
+            participant: vm.participantToAdd
+          })
+          .success(function(data){
+            Materialize.toast(data.message, 2000);
+            vm.load();
+          });
+      }
+    }
 
     $(document).ready(function(){
       var options = [

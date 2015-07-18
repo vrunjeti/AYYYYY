@@ -1,37 +1,37 @@
-<div>	
-	<h2>{{projectData.name}}</h2>
+<div>
+	<h2>{{project.projectData.name}}</h2>
     <div class="divider"></div>
-        <div class = "section">
-            <h4>Location</h4>
-            <p>{{projectData.location}}</p>
-        </div>
+    <div class = "section">
+        <h4>Description</h4>
+        <p> {{project.projectData.description}}</p>
+    </div>
     <div class="divider"></div>
-        <div class = "section">
-            <h4>Status</h4>
-            <p>{{projectData.status}}</p>
-        </div>
-        <div class="divider"></div>
-        <div class = "section">
-            <h4>Category</h4>
-            <p>{{projectData.category}}</p>
-        </div>
+    <div class = "section">
+        <h4>Location</h4>
+        <p>{{project.projectData.location}}</p>
+    </div>
     <div class="divider"></div>
-        <div class = "section">
-            <h4>Participants</h4>
-            <div ng-repeat = "participant in projectData.participants">
-            <p> {{participant}}</p>
-            </div>
-        </div>
+    <div class = "section">
+        <h4>Status</h4>
+        <p>{{project.projectData.status}}</p>
+    </div>
     <div class="divider"></div>
-        <div class = "section">
-            <h4>Description</h4>
-            <p> {{projectData.description}}</p>
+    <div class = "section">
+        <h4>Category</h4>
+        <p>{{project.projectData.category}}</p>
+    </div>
+    <div class="divider"></div>
+    <div class = "section">
+        <h4>Participants</h4>
+        <div ng-repeat = "participant in project.projectData.participants">
+        <p> {{participant}}</p>
         </div>
+    </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Pictures</h4>
             <ul id = "staggered-test">
-            <!--<p> {{projectData.pictures}}</p>-->
+            <!--<p> {{project.projectData.pictures}}</p>-->
                 <li class = "crop" style="transform: translateX(0px); opacity: 1;">
                     <img id="image-test-1" class ="responsive-img" src="http://www.azzanarts.com/tree-houses/wp-content/gallery/the-saloon-treehouse/the-saloon-treehouse-004.jpg" height="500" width="500">
                     <img id = "image-test-2" class ="responsive-img" src ="http://media-cdn.tripadvisor.com/media/photo-s/03/b5/f5/9e/timber-ridge-outpost.jpg" height="300" width="300">
@@ -51,20 +51,16 @@
                 <div class="row">
                 <form class="col s12">
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input id="first_name" type = "text">
-                        <label for="first_name">First Name</label>
-                    </div>
-                    <div class = "input-field col s6">
-                        <input id="last_name" type="text">
-                        <label for="last_name">Last Name</label>
+                    <div class="input-field col s12">
+                        <input id="name" type="text" ng-model="project.participantToAdd">
+                        <label for="name">Name</label>
                     </div>
                 </div>
                 </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="/#/projects/{{projectData._id}}" class=" modal-action modal-close waves-effect waves-green btn-flat">sign me up!</a>
+                <a href="/#/projects/{{project.projectData._id}}" ng-click="project.addParticipant()" class=" modal-action modal-close waves-effect waves-green btn-flat">sign me up!</a>
             </div>
         </div>
     </div>
