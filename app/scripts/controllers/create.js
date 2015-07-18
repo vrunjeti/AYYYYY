@@ -12,6 +12,7 @@ angular.module('bldrApp')
   .controller('CreateCtrl', function ($http, $scope, $location) {
 
     var vm = this;
+    vm.message = '';
   	var baseUrl = 'http://localhost:3000/api/';
     $('#upfile1').on('click', function() {
       $('#filUpload').trigger('click');
@@ -25,7 +26,7 @@ angular.module('bldrApp')
       		longitude:0,
       		address:'',
       	},
-        category: "General",
+        category: "",
         images: []
       };
     });
@@ -55,6 +56,7 @@ angular.module('bldrApp')
     		reader.readAsDataURL(el.files[0]);
     	}
     };
+
   	vm.insert = function(formData){
   		var data = {
   			name : formData.name, 
@@ -63,10 +65,13 @@ angular.module('bldrApp')
         category: formData.category,
   			images : formData.images
   		};
-      console.log(formData.category);
   		$http.post(baseUrl + 'projects' , data).success(function(data) {
-        console.log(data);
-        $location.path('/projects/' + data.data._id);
+        if (data.message === 'Validation failed') {
+          vm.message = 'Please fill out all the fields below';
+        }
+        else {
+          $location.path('/projects/' + data.data._id);
+        }
       });
   	};
 
@@ -80,7 +85,6 @@ angular.module('bldrApp')
       };
       map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
       google.maps.event.addListener(map, 'click', function(event) {
-        // console.log(event.latLng);
         vm.addMarker(event.latLng);
       });
 
@@ -134,7 +138,6 @@ angular.module('bldrApp')
 	      url: url,
 	      dataType: "json",
 	      success:function(data) {
-          console.log(data);
 	        vm.formData.location.address = data.results[0].formatted_address;
 	        $("#location_label").addClass('active');
 	        $scope.$apply();
