@@ -2,24 +2,34 @@
 	<h2>{{projectData.name}}</h2>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Location</h4>
+            <h4>Location</h4>
             <p>{{projectData.location}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Participants</h4>
+            <h4>Status</h4>
+            <p>{{projectData.status}}</p>
+        </div>
+        <div class="divider"></div>
+        <div class = "section">
+            <h4>Category</h4>
+            <p>{{projectData.category}}</p>
+        </div>
+    <div class="divider"></div>
+        <div class = "section">
+            <h4>Participants</h4>
             <div ng-repeat = "participant in projectData.participants">
             <p> {{participant}}</p>
             </div>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Description</h4>
+            <h4>Description</h4>
             <p> {{projectData.description}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
-            <h4>Project Pictures</h4>
+            <h4>Pictures</h4>
             <ul id = "staggered-test">
             <!--<p> {{projectData.pictures}}</p>-->
                 <li class = "crop" style="transform: translateX(0px); opacity: 1;">

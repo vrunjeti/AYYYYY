@@ -9,7 +9,7 @@
  */
 
 angular.module('bldrApp')
-  .controller('CreateCtrl', function ($http, $scope) {
+  .controller('CreateCtrl', function ($http, $scope, $location) {
 
   var vm = this;
 	var baseUrl = 'http://localhost:3000/api/';
@@ -17,27 +17,31 @@ angular.module('bldrApp')
 	$scope.$on('$viewContentLoaded', function() {
 
       vm.map_initialize();
-      vm.formData={
+      vm.formData = {
       	location:{
       		latitude: 0,
       		longitude:0,
-      		address:''
-      	}
+      		address:'',
+      	},
+        category: "General"
       };
     });
 
 	vm.insert = function(formData){
-
-		// var url = 'http://localhost:8000/auth/signup';
+    console.log(formData);
 		$http
-		.post(baseUrl , {
+		.post(baseUrl + "projects", {
 			name : formData.name, 
 			location : formData.location,
 			description : formData.description,
-			participants : formData.participants
+			participants : formData.participants,
+      category: formData.category
 			//image : formData.image
-			
 		})
+    .success(function(data){
+      console.log(data);
+      $location.path('/projects/' + data.data._id);
+    });
 	};
 
 	  var map;
