@@ -220,3 +220,38 @@ Note: The following objects are technically not valid (don't have location)
     {
         "message": "Project successfully deleted!"
     }
+
+### Add Participants To Project
+
+    PUT /api/addparticipant
+
+
+**Input**
+
+|   Name   |  Type  | Description | Example |
+|:--------:|:------:|:-----------:|:-----------:|
+| id | string |   **Required** | 55a9d09bf1d276801c000001
+| participant | string |   **Required** | Rose
+
+**Response**
+
+    {
+        "message": "Participant Rose successfully added!",
+        "data": {
+            "_id": "55aaa501b06c040403000006",
+            "status": "Status unavailable",
+            "category": "General",
+            "description": "skdc s,c",
+            "name": "lsafkjbv klsajdn kas",
+            "__v": 0,
+            "images": [],
+            "participants": [
+                "Rose"
+            ],
+            "location": {
+                "latitude": 42.34926227091114,
+                "longitude": -71.07596933841705,
+                "address": "138 Saint James Avenue, Boston, MA 02116, USA"
+            }
+        }
+    }

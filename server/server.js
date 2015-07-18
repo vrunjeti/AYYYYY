@@ -118,6 +118,27 @@ singleProjectRoute.delete(function(req, res){
   });
 });
 
+var addParticipantRoute = router.route('/addparticipant');
+
+addParticipantRoute.put(function(req, res){
+  Project.findByIdAndUpdate(
+    req.body.id,
+    {
+      $push: {
+        'participants': req.body.participant
+      }
+    },
+    function(err, project){
+      if(err) {
+        res.send(err);
+      }
+      res.json({
+        message: 'Participant ' + req.body.participant + ' successfully added!',
+        data: project
+      });
+  });
+});
+
 app.use('/api', router);
 
 app.listen(port);
