@@ -1,67 +1,26 @@
-
-<<<<<<< HEAD
-<h2>Project Title{{project.projectData.title}}</h2>
+<div>	
+	<h2>Project Title {{projectData.name}}</h2>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Location</h4>
-            <p> Actual location {{profileC.profileData.location}}</p>
+            <p> Actual location {{projectData.location}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Participants</h4>
-            <p> List of Participants{{profileC.profileData.participants}}</p>
+            <p> List of Participants {{projectData.participants}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Description</h4>
-            <p> Brief Details {{profileC.profileData.description}}</p>
+            <p> Brief Details {{projectData.description}}</p>
         </div>
     <div class="divider"></div>
         <div class = "section">
             <h4>Project Pictures</h4>
-            <p> Uploaded Pictures{{profileC.profileData.pictures}}</p>
+            <p> Uploaded Pictures{{projectData.pictures}}</p>
         </div>
     <div class = "right-align">
         <a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>
     </div>
-=======
-<div ng-controller="ProjectCtrl">
-	<div class="row"></div>
-	<h4>Project View</h4>
-
-	<div class="row">
-	  <div class="col s12 l6">
-	    <div class="row">
-	      <div class="input-field col s12">
-	      	<label for="name">Name</label>
-	        <span id="name" ng-model="project.name">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="input-field col s12">
-	      	<label for="location">Location</label>
-	        <span id="location" ng-model="project.location">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="input-field col s12">
-	      	<label for="description">Description</label>
-	        <span id="description" ng-model="project.description">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="input-field col s12">
-	      	<label for="participants">Participants</label>
-	        <input id="participants" ng-model="project.participants">
-	      </div>
-	    </div>
-	      
-	    <div class="row">
-	      <div class="input-field col s12">
-	      <label for="image">Upload Image</label>
-          </div>
-	    </div>
-	  </div>
-	</div>
 </div>
->>>>>>> Progress with angular
