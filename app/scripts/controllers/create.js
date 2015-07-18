@@ -7,25 +7,23 @@
  * # CreateCtrl
  * Controller of the bldrApp
  */
-/**angular.module('bldrApp')
-  .controller('CreateCtrl', function () {
-
-  	var vm = this;
-
-  	vm.a = 'hi';
-
-  });
-*/
 
 angular.module('bldrApp')
   .controller('CreateCtrl', function ($http, $window, $location, $scope) {
-    
 
     var vm = this;
 	var url = 'http://localhost:3000/api/';
 
 	$scope.$on('$viewContentLoaded', function() {
-      vm.initialize();
+
+      vm.map_initialize();
+      vm.formData={
+      	location:{
+      		latitude: 0,
+      		longitude:0,
+      		address:''
+      	}
+      };
     });
 
 	vm.insert = function(formData){
@@ -42,32 +40,21 @@ angular.module('bldrApp')
 		})
 	};
 
-		// alert("hello");
-
 	  var map;
       var marker;
 
-      // vm.loadScript = function(){
-
-      //   var script = document.createElement('script');
-      //   script.type = 'text/javascript';
-      //   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
-      //   document.body.appendChild(script);
-
-      // }
-
-      vm.initialize = function () {
+      vm.map_initialize = function () {
         var mapOptions = {
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        console.log($('#map-canvas'));
-        map = new google.maps.Map($('#map-canvas'), mapOptions);
-        // This event listener will call addMarker() when the map is clicked.
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         google.maps.event.addListener(map, 'click', function(event) {
           // console.log(event.latLng);
-          addMarker(event.latLng);
+          vm.addMarker(event.latLng);
         });
+
+        // alert("here");
 
         var pos;
         
@@ -111,28 +98,21 @@ angular.module('bldrApp')
 	      marker.setAnimation(google.maps.Animation.BOUNCE);
 	      setTimeout(function(){ marker.setAnimation(null); }, 750);
 	    }
-	    $http
-	    	.post('http://maps.googleapis.com/maps/api/geocode/json', {
-		    	latlng: location.A + ',' + location.F,
-		    	sensor: true
-	    	})
-	    	.success(function(data){
-	    		vm.formData.location.address = data.results[0].formatted_address;
-	    		vm.formData.location.latitude = location.A;
-	    		vm.formData.location.longitude = location.F;
-	    		// console.log(data.results[0].formatted_address);
-	    	});
-	    // var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + location.A + "," + location.F + "&sensor=true";
-	    // $.ajax({
-	    //   type: "POST",
-	    //   url: url,
-	    //   dataType: "json",
-	    //   success:function(data) {
-	    //     console.log(data.results[0].formatted_address);
-	    //   }
-	    // });
+	    vm.formData.location.latitude = location.A;
+		vm.formData.location.longitude = location.F;
+	    var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + location.A + "," + location.F + "&sensor=true";
+	    $.ajax({
+	      type: "POST",
+	      url: url,
+	      dataType: "json",
+	      success:function(data) {
+	        vm.formData.location.address = data.results[0].formatted_address;
+	        $("#location_label").addClass('active');
+	        $scope.$apply();
+	      }
+	    });
       }
-
-    // window.onload = loadScript;
+    
 
   });
+
