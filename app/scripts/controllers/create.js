@@ -25,12 +25,13 @@ angular.module('bldrApp')
       		longitude:0,
       		address:'',
       	},
-        category: "General"
+        category: "General",
+        images: []
       };
     });
 
-    $scope.formData = {};
-    $scope.formData.images = [];
+    // $scope.formData = {};
+    // vm.formData.images = [];
     $scope.fileNameChanged = function(el) {
     	var reader = new FileReader();
     	reader.onload = function(e) {
@@ -46,7 +47,7 @@ angular.module('bldrApp')
     			format: 'jpeg'
     		};
     		$http.post(url, payload).success(function (data) {
-    			$scope.formData.images.push(data.secure_url);
+    			vm.formData.images.push(data.secure_url);
     			$('#appendImage').append('<div class="col s3 span s3"><img src="' + data.secure_url + '"></img></div>');
     		});
     	};
@@ -54,7 +55,7 @@ angular.module('bldrApp')
     		reader.readAsDataURL(el.files[0]);
     	}
     };
-  	$scope.insert = function(formData){
+  	vm.insert = function(formData){
   		var data = {
   			name : formData.name, 
   			location : formData.location,
@@ -63,8 +64,11 @@ angular.module('bldrApp')
         category: formData.category,
   			images : formData.images
   		};
-
-  		$http.post(baseUrl + 'projects' , data);
+      console.log(formData.category);
+  		$http.post(baseUrl + 'projects' , data).success(function(data) {
+        console.log(data);
+        $location.path('/projects/' + data.data._id);
+      });
   	};
 
 	  var map;
@@ -131,6 +135,7 @@ angular.module('bldrApp')
 	      url: url,
 	      dataType: "json",
 	      success:function(data) {
+          console.log(data);
 	        vm.formData.location.address = data.results[0].formatted_address;
 	        $("#location_label").addClass('active');
 	        $scope.$apply();
