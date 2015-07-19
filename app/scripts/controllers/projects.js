@@ -42,13 +42,14 @@ angular.module('bldrApp')
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-
+        //add markers to the map. also add them to the markers array
         markers_data.forEach(function(json_obj) {
           vm.addMarker(json_obj);
-          // console.log(json_obj);
         });
 
+        //add marker listners
         for (var i = 0, m; m = markers[i]; i++) {
+          //mouseover listener
           google.maps.event.addListener(m, 'mouseover', function(e) {
             var contentString = '<div id="content">' +
                                   '<h5> Project Name: ' + this.project_info.project_title + '</h5>' +
@@ -61,6 +62,7 @@ angular.module('bldrApp')
             console.log(infowindow);
             infowindow.open(map, this);
           });
+          //mouseclick listener
           google.maps.event.addListener(m, 'click', function(e) {
             var contentString = '<div id="content">' +
                                   '<h5> Project Name: ' + this.project_info.project_title + '</h5>' +
@@ -73,6 +75,7 @@ angular.module('bldrApp')
             console.log(infowindow);
             infowindow.open(map, this);
           });
+          //mouseout listener
           google.maps.event.addListener(m, 'mouseout', function(e) {
             if(infowindow) {
                setTimeout(function () { infowindow.close(); }, 2000);
@@ -82,6 +85,7 @@ angular.module('bldrApp')
 
         var pos;
 
+        //if the user allows us to access his/her location
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function(location){
@@ -116,6 +120,7 @@ angular.module('bldrApp')
               project_id : event._id
             },
           });
+
           if(map.getBounds()!=null) {
             if(map.getBounds().contains(location)) {
               marker.setMap(map);
@@ -135,5 +140,14 @@ angular.module('bldrApp')
           markers.push(marker);
         }
       }
+
+    vm.refreshMap() {
+      if(markers_data!=null) {
+        markers=[];
+        markers_data.forEach(function(json_obj) {
+            vm.addMarker(json_obj);
+          });
+      }
+    }  
 
   });
