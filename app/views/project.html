@@ -1,50 +1,73 @@
+{{project.projectData}}
 <div>
-	<h2>{{project.projectData.name}}</h2>
+    <h2>{{project.projectData.name}}</h2>
     <div class="divider"></div>
-    <div class = "section">
-        <h4>Description</h4>
-        <p> {{project.projectData.description}}</p>
+    {{project.projectData.images}}
+    <div ng-repeat="pic in project.projectData.images">
+        <img ng-src="{{pic}}" alt="">
+        <!-- {{pic}} -->
     </div>
-    <div class="divider"></div>
-    <div class = "section">
-        <h4>Location</h4>
-        <p>{{project.projectData.location}}</p>
+    <div class="slider">
+      <ul class="slides">
+        <!-- <li ng-repeat="pic in project.projectData.images"> -->
+        <!-- <li> -->
+          <!-- <h2>{{pic}}</h2> -->
+          <!-- <img ng-src="{{pic}}"> -->
+          <!-- <img src="https://res.cloudinary.com/ayyyyy/image/upload/v1437256967/pxgintyycwh8ukceczdz.jpg"> -->
+        <!-- </li> -->
+        <li ng-repeat="pic in project.projectData.images">
+            <img ng-src="{{pic}}">
+        </li>
+      </ul>
     </div>
-    <div class="divider"></div>
-    <div class = "section">
-        <h4>Status</h4>
-        <p>{{project.projectData.status}}</p>
-    </div>
-    <div class="divider"></div>
-    <div class = "section">
-        <h4>Category</h4>
-        <p>{{project.projectData.category}}</p>
-    </div>
-    <div class="divider"></div>
-    <div class = "section">
-        <h4>Participants</h4>
-        <div ng-repeat = "participant in project.projectData.participants">
-        <p> {{participant}}</p>
-        </div>
-    </div>
-    <div class="divider"></div>
+    <div class="row">
+      <div class="col l6 s12">
         <div class = "section">
-            <h4>Pictures</h4>
-            <ul id = "staggered-test">
-            <!--<p> {{project.projectData.pictures}}</p>-->
-                <li class = "crop" style="transform: translateX(0px); opacity: 1;">
-                    <img id="image-test-1" class ="responsive-img" src="http://www.azzanarts.com/tree-houses/wp-content/gallery/the-saloon-treehouse/the-saloon-treehouse-004.jpg" height="500" width="500">
-                    <img id = "image-test-2" class ="responsive-img" src ="http://media-cdn.tripadvisor.com/media/photo-s/03/b5/f5/9e/timber-ridge-outpost.jpg" height="300" width="300">
-                    <img id = "image-test-4" class ="responsive-img" src ="http://blog.sfgate.com/thebigevent/files/2012/09/treehouse-vacaville-one-600x427.jpg" height="500" width="500">
-                    <img id = "image-test-5" class ="responsive-img" src = "http://tours.tourfactory.com/tours/media/scene/big2/00/18/77/57/18775703.jpg" height="500" width="500">
-                    <img id = "image-test-3" class ="responsive-img" src ="http://cdn.homedit.com/wp-content/uploads/2012/09/california-tree-house.jpg" height="600" width="500">
-                    <img id = "image-test-6" class ="responsive-img" src = "http://www.wadifa.co/wp-content/uploads/2015/05/treehouse-blueprints-good-design-on-others-galleries-12.jpg">
-                </li>
-            </ul>
+          <h4>Description</h4>
+          <div class="divider"></div>
+          <p> {{project.projectData.description}}</p>
+          <h5>Status: {{project.projectData.status}}</h5>
+          <h5>Category: {{project.projectData.category}}</h5>
         </div>
+        <div class="divider"></div>
+        <div class = "section">
+          <div class="row valign-wrapper">
+            <div class="col s8">
+              <h4>Participants</h4>
+            </div>
+            <div class="col s4">
+              <button data-target="modal2" class="btn modal-trigger valign">Join</button>
+            </div>
+          </div>
+          <table class="striped" ng-if="project.projectData.participants.length">
+            <thead>
+              <tr>
+                <th data-field="name">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="participant in project.projectData.participants">
+                <td>{{participant}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div ng-if="!project.projectData.participants.length">
+            <h5>No participants yet</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col l6 s12">
+        <div class="section">
+          <h4>Location</h4>
+          <div class="divider"></div>
+          <h5>{{project.projectData.location.address}}</h5>
+          <div id="map-canvas" style="height:500px"></div>
+        </div>
+      </div>
+    </div>
+
     <div class = "right-align">
-        <!--<a class="waves-effect waves-light btn"><i class="material-icons right"></i>Build Me</a>-->
-        <button data-target="modal2" class="btn modal-trigger">BuildMe</button>
+
         <div id="modal2" class="modal">
             <div class="modal-content">
                 <h3 align="left">Sign Up</h3>

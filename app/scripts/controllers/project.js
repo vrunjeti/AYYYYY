@@ -21,6 +21,8 @@ angular.module('bldrApp')
       $http.get(baseUrl + 'projects/' + vm.id)
   	    .success(function (data) {
   	      vm.projectData = data;
+          // vm.mapInit();
+          vm.initialize_map();
   	    });
     }
 
@@ -41,6 +43,42 @@ angular.module('bldrApp')
       }
     }
 
+    var map;
+    vm.initialize_map = function() {
+      var position = new google.maps.LatLng(vm.projectData.location.latitude, vm.projectData.location.longitude);
+      var mapOptions = {
+        zoom: 14
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      var options = {
+        map: map,
+        position: position
+      };
+
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: 'Hello World!'
+      });
+
+      map.setCenter(options.position);
+
+    }
+
+    vm.mapInit = function() {
+      // console.log(vm.projectData);
+      debugger;
+      var pos = new google.maps.LatLng(vm.projectData.location.latitude, vm.projectData.location.longitude);
+      map.setCenter(pos);
+      marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        animation: google.maps.Animation.DROP
+      });
+    };
+
     $(document).ready(function(){
       var options = [
         {selector: '.class', offset: 200, callback: 'globalFunction()' },
@@ -57,6 +95,7 @@ angular.module('bldrApp')
       ];
       $('.modal-trigger').leanModal();
       Materialize.scrollFire(options);
+      $('.slider').slider({full_width: true});
     });
 
 
