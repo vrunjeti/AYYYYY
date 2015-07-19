@@ -5,8 +5,8 @@
         <div class = "col s3">
             <button class="btn valign" ng-click="projects.toggleView()" >Show {{projects.toggleName}} View</button>
         </div>
-    </div>    
-    <div ng-show="projects.showListView" class = "row list_view" >        
+    </div>
+    <div ng-show="projects.showListView" class = "row list_view" >
         <div ng-repeat="project in projects.projectCollection">
             <div class="col s4">
                 <div class = "card blue-grey darken-1">
@@ -22,6 +22,6 @@
         </div>
     </div>
     <div ng-show="!projects.showListView" class = "row map_view" >
-        <div style="height:400px" id="map-canvas">
+        <div style="height:600px" id="map-canvas">
         </div>
     </div>

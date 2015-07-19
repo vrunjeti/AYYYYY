@@ -13,7 +13,7 @@ angular.module('bldrApp')
     var vm = this;
     var baseUrl = 'http://localhost:3000/api/';
     var map;
-    var markers_data = [] 
+    var markers_data = []
     var markers = [];
     var infowindow = new google.maps.InfoWindow();
     vm.showListView = false;
@@ -27,7 +27,7 @@ angular.module('bldrApp')
           markers_data = data;
           vm.map_initialize();
         });
-      
+
     });
 
     vm.toggleView = function(){
@@ -37,12 +37,12 @@ angular.module('bldrApp')
 
     vm.map_initialize = function() {
         var mapOptions = {
-          zoom: 16,
+          zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        
-        
+
+
         markers_data.forEach(function(json_obj) {
           vm.addMarker(json_obj);
           // console.log(json_obj);
@@ -81,12 +81,12 @@ angular.module('bldrApp')
         }
 
         var pos;
-        
+
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             function(location){
               pos = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-              map.setCenter(pos); 
+              map.setCenter(pos);
             },
             function() {
               location_init_fail();
@@ -94,11 +94,11 @@ angular.module('bldrApp')
         } else {
           location_init_fail();
         }
-        
+
       };
 
       vm.location_init_fail = function() {
-        var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461); 
+        var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461);
         map.setCenter(pos);
       };
 
@@ -131,7 +131,7 @@ angular.module('bldrApp')
               }
             });
           }
-          
+
           markers.push(marker);
         }
       }
