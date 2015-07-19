@@ -31,6 +31,12 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -71,8 +77,8 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        // Change this to '0.0.0.0' to access the server from outside. or 'localhost'
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -396,6 +402,13 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin'
+      ],
+      nodemon: [
+        'nodemon'
+      ],
+      default: [
+        'nodemon',
+        'serve'
       ]
     },
 
@@ -408,6 +421,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -419,6 +433,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      // 'concurrent:nodemon',
       'connect:livereload',
       'watch'
     ]);
@@ -457,8 +472,11 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
+    // 'newer:jshint',
+    // 'test',
+    // 'build'
+    // 'nodemon',
+    // 'serve'
+    'concurrent:default'
   ]);
 };
