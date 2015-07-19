@@ -32,7 +32,7 @@
 	    </div>
 	    <div class="row">
     	  <div class = "input-field col s12">
-  	  	  <select name="category" ng-model="create.formData.category">
+  	  	  <select name="category" class="browser-default" ng-model="create.formData.category">
 	  	    	<option value="" disabled selected>Choose your Category (Required)</option>
             <option value="General">General</option>
             <option value="Outdoor">Outdoor</option>
@@ -56,6 +56,7 @@
          	<input id="filUpload" type="file" name="filUpload" required="required" onchange="angular.element(this).scope().fileNameChanged(this)" style="display:none;">
         </div>
       </div>
+	  	<!-- <button class="btn" ng-click="create.populateImages()">Populate Images</button> -->
 	  </form>
 		<!-- map -->
 	  <div class="col l6">
@@ -64,9 +65,14 @@
     </div>
 	</div>
 	<!-- Uploaded Pictures -->
-  <div class="row">
+  <div class="row" ng-show="create.formData.images.length">
   	<h5>Pictures:</h5>
-  	<div id="appendImage"></div>
+  	<div class="row">
+  		<div ng-repeat="pic in create.formData.images" class="col l4">
+  			<img class="responsive-img" ng-src="{{pic}}">
+  		</div>
+  	</div>
+  	<!-- <div id="appendImage"></div> -->
   </div>
 
 </div>

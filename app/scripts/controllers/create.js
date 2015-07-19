@@ -51,8 +51,10 @@ angular.module('bldrApp')
     		};
     		$http.post(url, payload).success(function (data) {
     			vm.formData.images.push(data.secure_url);
-    			$('#appendImage').append('<div class="col s3 span s3"><img src="' + data.secure_url + '"></img></div>');
-    		});
+    			// $('#appendImage').append('<div class="col s3 span s3"><img src="' + data.secure_url + '"></img></div>');
+    		  // alert(data.secure_url);
+          // $scope.$apply();
+        });
     	};
     	for (var iter = 0; iter < el.files.length ; iter ++ ) {
     		reader.readAsDataURL(el.files[0]);
@@ -146,6 +148,14 @@ angular.module('bldrApp')
 	      }
 	    });
      };
+
+     vm.populateImages = function() {
+      vm.formData.images = [
+        'http://images.medicaldaily.com/sites/medicaldaily.com/files/2013/08/04/0/62/6259.jpg',
+        'http://i.dailymail.co.uk/i/pix/2014/10/06/1412613364603_wps_17_SANTA_MONICA_CA_AUGUST_04.jpg',
+        'http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'
+      ];
+     }
 
   });
 
