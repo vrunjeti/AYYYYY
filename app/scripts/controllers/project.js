@@ -67,35 +67,12 @@ angular.module('bldrApp')
 
     }
 
-    vm.mapInit = function() {
-      // console.log(vm.projectData);
-      debugger;
-      var pos = new google.maps.LatLng(vm.projectData.location.latitude, vm.projectData.location.longitude);
-      map.setCenter(pos);
-      marker = new google.maps.Marker({
-        position: pos,
-        map: map,
-        animation: google.maps.Animation.DROP
-      });
-    };
-
     $(document).ready(function(){
-      var options = [
-        {selector: '.class', offset: 200, callback: 'globalFunction()' },
-        {selector: '.other-class', offset: 200, callback: 'globalFunction()'},
-        {selector: '#staggered-test', offset: 205, callback: 'Materialize.toast("Please continue scrolling!", 1500 )' },
-        {selector: '#staggered-test', offset: 400, callback: 'Materialize.showStaggeredList("#staggered-test")' },
-        {selector: '#image-test-1', offset: 0, callback: 'Materialize.fadeInImage("#image-test-1")' },
-        {selector: '#image-test-2', offset: 0, callback: 'Materialize.fadeInImage("#image-test-2")' },
-        {selector: '#image-test-3', offset: 0, callback: 'Materialize.fadeInImage("#image-test-3")' },
-        {selector: '#image-test-4', offset: 0, callback: 'Materialize.fadeInImage("#image-test-4")' },
-        {selector: '#image-test-5', offset: 0, callback: 'Materialize.fadeInImage("#image-test-5")' },
-        {selector: '#image-test-6', offset: 0, callback: 'Materialize.fadeInImage("#image-test-6")' },
-
-      ];
       $('.modal-trigger').leanModal();
-      Materialize.scrollFire(options);
-      $('.slider').slider({full_width: true});
+      $('.slider').slider({
+        full_width: true,
+        indicators: true
+      });
     });
 
 

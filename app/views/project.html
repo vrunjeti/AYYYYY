@@ -1,7 +1,8 @@
 <div>
     <h2>{{project.projectData.name}}</h2>
     <div class="divider"></div>
-    <div class="slider">
+    <div class="row"></div>
+    <div ng-if="project.projectData.images.length" class="slider">
       <ul class="slides">
         <li ng-repeat="pic in project.projectData.images" class="center-align">
             <img ng-src="{{pic}}">
@@ -49,7 +50,7 @@
           <h4>Location</h4>
           <div class="divider"></div>
           <h5>{{project.projectData.location.address}}</h5>
-          <div id="map-canvas" style="height:500px"></div>
+          <div id="map-canvas" style="height:300px"></div>
         </div>
       </div>
     </div>

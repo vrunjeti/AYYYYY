@@ -1,74 +1,74 @@
-<!-- <p>This is the create view.</p>
-<p>{{create.a}}</p> -->
-
-
 <div>
 	<div class="row"></div>
-	<h4>Registration</h4>
-	<div class="row">
-		<h5 style="color:darkred;">{{create.message}}<h5>
+	<div class="row valign-wrapper">
+		<div class="col m9">
+			<h4>Create A Project!</h4>
+		</div>
+		<div class="col m3 valign">
+    	<button class="btn waves-effect waves-light right" type="button" name="action" ng-click="create.insert(create.formData)">
+    		Submit <i class="mdi-content-send right"></i>
+			</button>
+		</div>
 	</div>
 	<div class="row">
 	  <form class="col s12 l6" enctype="multipart/form-data">
 	    <div class="row">
 	      <div class="input-field col s12">
-              <label for="name">Name</label>
+          <label for="name">Name (Required)</label>
 	        <input id="name" type="text" ng-model="create.formData.name">
 	      </div>
 	    </div>
 	    <div class="row">
 	      <div class="input-field col s12">
-	      	<label for="location" id="location_label">Location</label>
+	      	<label for="location" id="location_label">Location (Choose on map)</label>
 	        <input id="location" type="text" ng-model="create.formData.location.address" disabled="disabled">
 	      </div>
 	    </div>
 	    <div class="row">
 	      <div class="input-field col s12">
-	      	<label for="description">Description</label>
-	        <input id="description" type="text" ng-model="create.formData.description">
+          <textarea id="description" class="materialize-textarea" ng-model="create.formData.description"></textarea>
+          <label for="description">Description (Required)</label>
+        </div>
+	    </div>
+	    <div class="row">
+    	  <div class = "input-field col s12">
+  	  	  <select name="category" ng-model="create.formData.category">
+	  	    	<option value="" disabled selected>Choose your Category (Required)</option>
+            <option value="General">General</option>
+            <option value="Outdoor">Outdoor</option>
+	  		    <option value="Painting">Painting</option>
+            <option value="Woodwork">Wood Work</option>
+            <option value="Gardening">Gardening</option>
+            <option value="Home Improvement">Home Improvement</option>
+            <option value="Education">Education</option>
+        	</select>
+    	  </div>
+      </div>
+	    <div class="row">
+	      <div class="input-field col s12">
+	      	<label for="status">Status</label>
+	        <input id="status" type="text" ng-model="create.formData.status">
 	      </div>
 	    </div>
 	    <div class="row">
-	    	<div class="col s12">
-	    		<label>Event Photo</label>
-	    	</div>
-	      	<div class="input-field col s12">
-	      		<button id="upfile1" type="button">Add Image</button>
-	         	<input id="filUpload" type="file" name="filUpload" required="required" onchange="angular.element(this).scope().fileNameChanged(this)" style="display:none;">
-           	</div>
+      	<div class="input-field col s12">
+      		<button id="upfile1" type="button" class="btn">Add Image</button>
+         	<input id="filUpload" type="file" name="filUpload" required="required" onchange="angular.element(this).scope().fileNameChanged(this)" style="display:none;">
         </div>
-
-
-      	<div class="row">
-      	  <div class = "input-field col s12">
-      	  	    <select name="category" class="browser-default" ng-model="create.formData.category">
-      	  	    	<option value="" disabled selected>Choose your Category</option>
-      	  		    <option value="0">Painting</option>
-		            <option value="1">Wood Work</option>
-		            <option value="2">Garderning</option>
-		            <option value="3">House Building</option>
-            	</select> 
-      	  </div>
-      	</div>
-	    <div class="row">
-	    	<div class="col s3">
-	    		<h4>Pictures:</h4>
-	    	</div>
-	    	<div id="appendImage">
-		    </div>
-	    </div>
-	    <div class="row">
-		    <div class="col s12">
-		    	<button class="btn waves-effect waves-light" type="button" name="action" ng-click="create.insert(create.formData)">
-		    		Submit
-			    	<i class="mdi-content-send right"></i>
-				</button>
-			</div>
-		</div>	
+      </div>
 	  </form>
+		<!-- map -->
 	  <div class="col l6">
-    	<div  id="map-canvas" style="height:500px"></div>
+	  	<h5>Choose A Location:</h5>
+    	<div id="map-canvas" style="height:500px"></div>
     </div>
 	</div>
-	
+	<!-- Uploaded Pictures -->
+  <div class="row">
+  	<div class="col s3">
+  		<h4>Pictures:</h4>
+  	</div>
+  	<div id="appendImage"></div>
+  </div>
+
 </div>

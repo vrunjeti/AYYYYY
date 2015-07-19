@@ -18,6 +18,10 @@ angular.module('bldrApp')
       $('#filUpload').trigger('click');
     });
 
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+
   	$scope.$on('$viewContentLoaded', function() {
       vm.map_initialize();
       vm.formData = {
@@ -59,7 +63,7 @@ angular.module('bldrApp')
 
   	vm.insert = function(formData){
   		var data = {
-  			name : formData.name, 
+  			name : formData.name,
   			location : formData.location,
   			description : formData.description,
         category: formData.category,
@@ -67,7 +71,7 @@ angular.module('bldrApp')
   		};
   		$http.post(baseUrl + 'projects' , data).success(function(data) {
         if (data.message === 'Validation failed') {
-          vm.message = 'Please fill out all the fields below';
+          Materialize.toast('Please fill out all the required fields!', 1500);
         }
         else {
           $location.path('/projects/' + data.data._id);
@@ -89,12 +93,12 @@ angular.module('bldrApp')
       });
 
       var pos;
-      
+
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           function(location){
             pos = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-            map.setCenter(pos); 
+            map.setCenter(pos);
             marker = new google.maps.Marker({
               position: pos,
               map: map,
@@ -108,11 +112,11 @@ angular.module('bldrApp')
       } else {
         location_init_fail();
       }
-      
+
     };
 
     vm.location_init_fail = function() {
-      var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461); 
+      var pos = new google.maps.LatLng(42.35949527013756, -71.0592269897461);
       map.setCenter(pos);
       marker = new google.maps.Marker({
         position: pos,
