@@ -1,5 +1,7 @@
 # bldr
 
+This is now hosted! View at: http://45.55.77.223:9000/#/ (a lovely ip address indeed)
+
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.12.1.
 
@@ -11,7 +13,9 @@ Run `npm install -g grunt-cli bower yo generator-karma generator-angular` first
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt` to run everything. Server will start and the website will be available on port 9000
+
+Run `grunt build` for building and `grunt serve` for preview.
 
 To run server, `cd` into `/server`, run `npm install` if it's the first time, and run `nodemon server.js` to start the server.
 
