@@ -143,10 +143,13 @@ angular.module('bldrApp')
 
     vm.refreshMap() {
       if(markers_data!=null) {
-        markers=[];
+        markers.forEach(function(marker) {
+          marker.setMap(null);
+        });
+        markers = [];
         markers_data.forEach(function(json_obj) {
-            vm.addMarker(json_obj);
-          });
+          vm.addMarker(json_obj);
+        });
       }
     }  
 
