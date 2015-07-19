@@ -1,9 +1,14 @@
     <div class = "row valign-wrapper">
-        <div class = "col s9">
+        <div class = "col s6">
              <h1> All Projects</h1>
         </div>
-        <div class = "col s3">
-            <button class="btn valign" ng-click="projects.toggleView()" >Show {{projects.toggleName}} View</button>
+        <div class="col s6">
+            <div class="row valign-wrapper">
+                    <button class="btn valign" ng-show="!projects.showListView" ng-click="projects.refreshMap()">
+                        Refresh Search In Map
+                    </button>
+                    <button class="btn valign right" ng-click="projects.toggleView()" >Show {{projects.toggleName}} View</button>
+            </div>
         </div>
     </div>
     <div ng-show="projects.showListView" class = "row list_view" >

@@ -35,8 +35,6 @@ angular.module('bldrApp')
       };
     });
 
-    // $scope.formData = {};
-    // vm.formData.images = [];
     $scope.fileNameChanged = function(el) {
     	var reader = new FileReader();
     	reader.onload = function(e) {
