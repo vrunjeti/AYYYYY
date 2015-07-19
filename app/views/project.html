@@ -1,21 +1,9 @@
-{{project.projectData}}
 <div>
     <h2>{{project.projectData.name}}</h2>
     <div class="divider"></div>
-    {{project.projectData.images}}
-    <div ng-repeat="pic in project.projectData.images">
-        <img ng-src="{{pic}}" alt="">
-        <!-- {{pic}} -->
-    </div>
     <div class="slider">
       <ul class="slides">
-        <!-- <li ng-repeat="pic in project.projectData.images"> -->
-        <!-- <li> -->
-          <!-- <h2>{{pic}}</h2> -->
-          <!-- <img ng-src="{{pic}}"> -->
-          <!-- <img src="https://res.cloudinary.com/ayyyyy/image/upload/v1437256967/pxgintyycwh8ukceczdz.jpg"> -->
-        <!-- </li> -->
-        <li ng-repeat="pic in project.projectData.images">
+        <li ng-repeat="pic in project.projectData.images" class="center-align">
             <img ng-src="{{pic}}">
         </li>
       </ul>

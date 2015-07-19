@@ -1,0 +1,11 @@
+.slider .slides {
+  background-color: #fff;
+}
+
+.slider .slides li {
+  opacity: 1;
+}
+
+.slider .slides li img {
+  width: auto;
+}
