@@ -13,7 +13,7 @@ angular.module('bldrApp')
 
     var vm = this;
     vm.message = '';
-  	var baseUrl = 'http://localhost:3000/api/';
+  	var baseUrl = 'http://45.55.77.223:3000/api/';
     $('#upfile1').on('click', function() {
       $('#filUpload').trigger('click');
     });

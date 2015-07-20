@@ -11,7 +11,7 @@ angular.module('bldrApp')
   .controller('ProjectsCtrl', function ($http, $scope) {
 
     var vm = this;
-    var baseUrl = 'http://localhost:3000/api/';
+    var baseUrl = 'http://45.55.77.223:3000/api/';
     var map;
     var markers_data = []
     var markers = [];
@@ -148,6 +148,6 @@ angular.module('bldrApp')
           vm.addMarker(json_obj);
         });
       }
-    }  
+    }
 
   });

@@ -11,7 +11,7 @@ angular.module('bldrApp')
   .controller('ProjectCtrl', function ($scope, $http, $routeParams) {
   	var vm = this;
     vm.id = $routeParams.id;
-    var baseUrl = 'http://localhost:3000/api/';
+    var baseUrl = 'http://45.55.77.223:3000/api/';
 
     $scope.$on('$viewContentLoaded', function() {
       vm.load();
